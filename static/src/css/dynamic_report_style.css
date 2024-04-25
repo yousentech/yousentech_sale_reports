@@ -1,0 +1,97 @@
+.mytable {
+    font-size: 14px;
+    border-spacing: 0;
+  border-collapse: separate;
+  border-radius: 20px;
+  border: 2px solid #E8E8E8;
+  overflow: hidden;    
+    width: 98%;
+    text-align:start;
+                                       
+  }
+ 
+/* .CompanyTable tr{
+    font-size: 14px;
+    font-weight: 100px;
+    background-color: #71639e;
+} */
+.head{ 
+    box-shadow: 0 2px 4px #FAF8FE;
+    width:98%;
+    text-align:start;
+    } 
+.mytable th{
+    background-color: #71639e;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    /* padding-left: 7px;
+    padding-right: 7px; */
+    color: white;
+    border-top: 2px solid white;
+    
+}
+
+.bold-line{  
+  
+  font-weight:bold;
+}
+.bold-line button{  
+  
+  background-color:transparent; 
+  border: 0px; 
+  /* color:#495057; */
+} 
+.mytable td {
+    padding-top: 4px;
+    padding-bottom: 4px;
+    
+    padding-inline-start: 10px;
+    /* min-width: 60px;
+    max-width: 200px; */
+    padding-left: 3px;
+    padding-right: 3px;
+    border-bottom: 1px solid white;
+ 
+  }       
+
+   /* tr:nth-child(odd) {
+    background-color: #E8E8E8;
+  }
+ tr:nth-child(even) {
+    background-color:#FAF8FE;
+  } */
+  
+input{
+    /* width:130px; */
+    border: 1px solid #71639e  ;
+    padding: 2px; 
+    border-radius: 0.25rem;
+    background-color: transparent;
+}
+input:hover {
+    border-color: #ced4da;
+}
+
+.apply-btn{
+    padding: 3px; 
+    width: 100px;
+     height:32px;
+     color:white;
+     font-size:18;
+     background-color: #71639e;
+}
+label
+{
+    width:140px;
+}
+.next-btn{
+  margin-left: 70px;
+  margin-right: 70px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+   padding: 3px;
+    width: 50px;
+     height:30px;
+     color:white;
+     background-color: #71639e;
+}
