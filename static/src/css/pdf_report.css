@@ -1,0 +1,342 @@
+
+  .table-div{
+    display: inline-block;
+    /*background: #3f3d3d;*/
+    padding-left: 40px;
+   
+    margin-bottom: 10px;
+    /* background-color: aqua; */
+  
+  }
+  /* , .table-one-th */
+  .table-one-td-left {
+    border-left: 2px solid #3f3d3d;
+    /* border-style:solid; 
+    border-color:#080707;
+    border-width: 0 2px 0px 0px; */
+    padding-left: 10px;
+    padding-bottom: 5px;
+    font-weight: bold;
+    font-size: 14px;
+    text-align: left;
+    background-color: white;
+    /* max-width:150px ; */
+    text-wrap: nowrap;
+    /* text-align: left; */
+  }
+  .table-one-td-right {
+    border-right: 2px solid #3f3d3d;
+    text-align: right;
+    /* border-style:solid; 
+    border-color:#080707;
+    border-width: 0 2px 0px 0px; */
+    padding-right: 10px;
+    padding-bottom: 5px;
+    font-weight: bold;
+    background-color: white;
+    font-size: 14px;
+    /* max-width:150px ; */
+    text-wrap: nowrap;
+    /* text-align: left; */
+  }
+  .table-one-td1-left{
+    /* border-left: 4px solid black; */
+    background-color: white;
+    text-align: left;
+    padding-left: 1px;
+    padding-bottom: 5px;
+    font-size: 12px;
+    min-width: 340px;
+    max-width:360px ;
+    font-weight: 10px;
+    /* text-align: left; */
+  }
+  .table-one-td1-right{
+    /* border-left: 4px solid black; */
+    background-color: white;
+    text-align: right;
+    padding-left: 1px;
+    padding-bottom: 5px;
+    font-size: 12px;
+    min-width: 340px;
+    max-width:360px ;
+    font-weight: 10px;
+    /* text-align: left; */
+  }
+
+
+  #mytable table{
+    font-size: 13px;
+    /* border-style: ridge; */
+    border: 10px solid #1e1d1ddc;
+    padding: 5px; 
+    width: 95%;
+    text-align:center;
+    background-color: #604444;
+    /* box-shadow: 4px 4px 8px rgba(0, 0, 0.5, 0.5); */
+  }
+  .test{
+    margin-top: 0;
+    margin-left: 0;
+    margin-right: 0;
+
+  }
+  
+  .wrapper{
+     width: auto;
+   /* height: 29.7cm; */
+    background: white;
+    position: relative;
+    /* margin-top: 10px; */
+    /*padding: 30px;*/
+   
+  }
+  .header-info{
+    /* width: 21cm;
+    height: 290px; */
+    background: white;
+  }
+  /*#F6F4F0;*/
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    /* align-items: center; */
+    /*padding: 20px;*/
+   
+  }
+  
+  .logo {
+    width: 180px;
+    display:inline-block;
+margin-inline-start:220px ;
+   /* margin-left: 220px; */
+    /* margin-top: 10px; */
+    /* text-align: right; */
+    /* align-content: end; */
+    height: 120px;
+  }
+  
+  .company-name {
+    font-size: 15px;
+    margin-inline-end:200px ;
+    display:inline-block;
+  /* margin-right: 200px; */
+    color: #030102;
+    text-align: justify;  
+   
+  }
+  /* .invoice-name */
+  h1{
+    font-size: 30px;
+    font-weight: bold;
+    text-align: center;
+    align-items: center;
+    /* display: inline-block; */
+    /* margin-left: 460px; */
+    /* margin-top: 20px; */
+    color: #030102;
+  }
+ 
+  hr{
+    height: 3px;
+    background: #030102;
+    margin-top: 30px;
+    /* width: 910px; */
+    margin-left: 25px;
+  }
+  #details {
+    margin-top: 30px;
+     display: flex;
+    /* column-gap: 240px; */
+justify-content: space-between;    
+  }
+  /*#D9D1C1*/
+ /*#D9D1C1*/
+#vertical-line {
+  margin-left: 50px;
+  padding-left: 10px;
+  border-left: 3px solid #030102;
+  /* float: inline-start; */
+  float: left;
+  margin-bottom: 20px;
+  white-space:  nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  /* flex: 0 1 550px; */
+ 
+}
+
+#vertical-line .titel-data {
+  color: #030102;
+  font-weight: 300;
+  font-size: 15px;
+ 
+  
+}
+#vertical-line p {
+  color: #2a2929;
+  font-weight: 200;
+  font-size: 13px;
+  
+
+}
+#vertical2-line {
+  margin-left: 200px;
+  padding-left: 10px;
+  border-left: 3px solid #030102;
+  float: left;
+  margin-bottom: 20px;
+  white-space:  nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  /* flex: 0 1 150px; */
+
+ 
+}
+.span1{
+  color: #030102;
+  font-weight: 100;
+  font-size: 13px;
+}
+#vertical2-line .titel-data {
+  color: #030102;
+  font-weight: 300;
+  font-size: 15px;
+ 
+  
+}
+#vertical2-line p {
+  color: #2a2929;
+  font-weight: 200;
+  font-size: 13px;
+  
+
+}
+.invoice-items{
+    width: 95%;
+    border-collapse: collapse;
+    /* border-color: #3f3d3d; */
+    /* border: 2px outset #3f3d3d; */
+    box-shadow: 1px 1px 10px #3f3d3d;
+
+    margin-bottom: 30px;
+    margin-top: 30px;
+    margin-left: 20px;
+  }
+  /*#f9f9f9*/
+  
+  .invoice-items .td-2 {
+    padding: 7px;
+    border: 1px solid white;
+    text-align:left;
+    color: #333;
+    min-width: 100px;
+    font-weight: 20px;
+    font-size: 12px;
+    
+  }
+  
+  .td-1{
+    padding: 7px;
+    border: 1px solid white;
+    text-align: center;
+    color: #333;
+    font-size: 15px;
+    font-weight: 150px;
+    background-color: #d2d2d2;
+  }
+  .td-3{
+    padding: 7px;
+    border: 1px solid white;
+    text-align: center;
+    color: #2f2f2f;
+    font-size: 15px;
+    font-weight: 170px;
+    background-color: #f1ede1;
+  }
+  
+ 
+  
+  .invoice-items th {
+    background-color: #3f3d3d;
+    padding: 9px;
+    border: 1px solid white;
+    text-align: center;
+    color: white;
+    font-size: 12px;
+    font-weight: 100px;
+  }
+   table tbody tr:nth-child(odd){
+    background: white;
+    padding: 10px;
+    border: 1px solid white;
+    text-align: center;
+    color: #333;
+    font-size: 12px;
+    font-weight: 7px;
+   
+  }
+  table tbody tr:nth-child(even){
+    
+    background: #F6F4F0;
+    padding: 10px;
+    border: 1px solid white;
+    text-align: center;
+    color: #333;
+    font-size: 13px;
+    font-weight: 7px;
+  
+    /*border-bottom: 1px solid #0f8d69;
+    border-top: 1px solid #971414;
+    border-left: rebeccapurple;
+    border-right: #646464;*/
+  }
+  
+  /*header {
+    padding: 40px 0;
+    margin-bottom: 40px;
+    border-bottom: 1px solid #AAAAAA;
+  }
+  /*.clearfix:after {
+    content: "";
+    display: table;
+    clear: both;
+  }*/
+  
+  
+   img {
+    height: 40px;
+    
+  }
+  
+  /*#company {
+    float: right;
+    text-align: right;
+  }*/
+  #notices{
+    padding-left: 7px;
+    border-left: 6px solid #030102;  
+    margin-left: 25px;
+   
+  
+  }
+  
+  #notices .notice {
+    font-size: 1.2em;
+   
+  }
+  footer{
+    
+      color: black;
+      width: 100%;
+      height: 40px;
+      position: absolute;
+      bottom: 0;
+      border-top: 1px solid #F6F4F0;
+      padding: 8px 0;
+      text-align: center;
+      background-color: #F6F4F0;
+    
+    
+  }

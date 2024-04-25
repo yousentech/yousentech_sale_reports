@@ -1,0 +1,196 @@
+<odoo>
+  <data>
+    
+     
+      
+      <record id="excl_profit_margin_rpt" model="ir.actions.report">
+        <field name="name">profit.margin XLSX Report</field>
+        <field name="model">profit.redys</field>
+        <field name="report_type">xlsx</field>
+        <field name="report_name">yousentech_sale_reports.report_xlsx_profit_margin</field>
+        <field name="report_file">xlsx_profit_margin</field>
+    </record>
+     
+    <record id="print_profit_margin_rpt" model="ir.actions.report">
+      <field name="name">profit.pdf.report</field>
+      <field name="model">profit.redys</field>
+      <field name="report_type">qweb-pdf</field>
+      <!-- <field name="menu">True</field> -->
+      <field name="report_name">yousentech_sale_reports.pdf_profit_margin_temp</field>
+      <field name="report_file">yousentech_sale_reports.pdf_profit_margin_temp</field>
+      <field name="paperformat_id" ref="yousentech_sale_reports.YOUR_FORMAT_pdf_report"/>
+  </record>
+    <template id="pdf_profit_margin_temp">
+      <t t-call="web.html_container">
+            <t t-call="yousentech_sale_reports.header_footer_temp"/>
+
+          <!-- <t t-foreach="docs" t-as="doc"> -->
+          <t t-call="web.external_layout">
+              <head>
+                
+                  <link href="/yousentech_sale_reports/static/src/css/pdf_report.css" rel="stylesheet" />
+              </head>
+
+              <body>
+                 
+                  <div class="header-info">
+                      <div class="invoice-name">
+                          <h1>Sales profit margin report</h1>
+                      </div>
+                      <div class="wrapper">
+
+                        <div id="details" class="clearfix">
+                            <table class="table-div">
+                                <tbody>
+
+                                    <tr>
+                                        <td t-attf-class="#{'table-one-td-left' if current_lang=='en_US' else 'table-one-td-right'} text-nowrap">Partner :</td>
+                                        <td t-attf-class="#{'table-one-td1-left' if current_lang=='en_US' else 'table-one-td1-right'}" colspan="6">
+                                            <t t-esc="data['partner_name']"></t>
+                                        </td>
+
+                                        <td t-attf-class="#{'table-one-td-left' if current_lang=='en_US' else 'table-one-td-right'} text-nowrap">From Date :</td>
+                                        <td t-attf-class="#{'table-one-td1-left' if current_lang=='en_US' else 'table-one-td1-right'}">
+                                            <t t-esc="data['from_date']"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td t-attf-class="#{'table-one-td-left' if current_lang=='en_US' else 'table-one-td-right'} text-nowrap">Salesman :</td>
+                                        <td t-attf-class="#{'table-one-td1-left' if current_lang=='en_US' else 'table-one-td1-right'}" colspan="6">
+                                            <t t-esc="data['salesman_name']"></t>
+                                        </td>
+
+                                        <td t-attf-class="#{'table-one-td-left' if current_lang=='en_US' else 'table-one-td-right'} text-nowrap">To Date:</td>
+                                        <td t-attf-class="#{'table-one-td1-left' if current_lang=='en_US' else 'table-one-td1-right'}">
+                                            <t t-esc="data['to_date']"></t>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td t-attf-class="#{'table-one-td-left' if current_lang=='en_US' else 'table-one-td-right'} text-nowrap">Journal :</td>
+                                        <td t-attf-class="#{'table-one-td1-left' if current_lang=='en_US' else 'table-one-td1-right'}" colspan="6">
+                                            <t t-esc="data['journal_name']"></t>
+                                        </td>
+
+                                        <td t-attf-class="#{'table-one-td-left' if current_lang=='en_US' else 'table-one-td-right'} text-nowrap">Analysis Account:</td>
+                                        <td t-attf-class="#{'table-one-td1-left' if current_lang=='en_US' else 'table-one-td1-right'}">
+                                            <t t-esc="data['analysis_account_name']"></t>
+                                        </td>
+                                    </tr>
+                                    
+                                </tbody>
+                            </table>
+
+                        </div>
+
+
+
+                         
+                      </div>
+                      <br/>
+
+
+                      <br/>
+                      <table class="invoice-items">
+                          <thead>
+                              <tr>
+                                  <th>Date</th>
+                                  <t t-if="show_product">
+                                      <th>Product</th>
+                                  </t>
+                                  <th>Inv NO </th>
+                                  <th>Inv Type</th>
+                                  <th>Partner</th>
+                                  <th>Net sales</th>
+                                  <th>Cost of sales</th>
+                                  <th>invoice profit</th>
+                                  <t t-if="show_product">
+                                      <th>Total Quantitiy</th>
+                                  </t>
+                              </tr>
+                          </thead>
+                          <tbody>
+                              <tr>
+                                  <td class="td-1">Total</td>
+                                  <!-- show_name_company -->
+                                  <t t-if="show_product">
+                                    <td class="td-1">_</td>
+                                </t>
+                                  <td class="td-1" colspan="3">
+                                      <span t-esc="', '.join(g for g in mycompany)"/>
+                                  </td>
+                                 
+                                  <td class="td-1">
+                                      <t t-esc="sum_amount_untaxed" t-options="{'widget': 'monetary', 'display_currency': env.company.currency_id}"/>
+                                  </td>
+                                  <td class="td-1">
+                                      <t t-esc="sum_prodect_cost" t-options="{'widget': 'monetary', 'display_currency': env.company.currency_id}"/>
+                                  </td>
+                                  <td class="td-1">
+                                      <t t-esc="sum_amount_profit" t-options="{'widget': 'monetary', 'display_currency': env.company.currency_id}"/>
+                                  </td>
+                                  
+                                 
+                                  <t t-if="show_product">
+                                      <td class="td-1">
+                                          <t t-esc="sum_quantity"/>
+                                      </td>
+                                  </t>
+                              </tr>
+                              <t t-foreach="datas" t-as="item">
+
+                                  <tr>
+                                      <td class="td-2">
+                                          <t t-esc="item['date']" />
+                                      </td>
+                                      <t t-if="show_product">
+
+                                        <td class="td-2">
+                                            <t t-esc="item['prodect_name']"/>
+                                        </td>
+                                    </t>
+                                      <td class="td-2">
+                                          <t t-esc="item['name']"/>
+                                      </td>
+                                      <td class="td-2">
+                                          <t t-esc="item['move_type']"/>
+                                      </td>
+                                      <td class="td-2">
+                                          <t t-esc="item['partner_name']"/>
+                                      </td>
+                                      <td class="td-2">
+                                          <t t-esc="item['amount_untaxed']" t-options="{'widget': 'monetary', 'display_currency': env.company.currency_id}"/>
+                                      </td>
+                                      <td class="td-2">
+                                          <t t-esc="item['prodect_cost']" t-options="{'widget': 'monetary', 'display_currency': env.company.currency_id}"/>
+                                      </td>
+                                      <td class="td-2">
+                                          <t t-esc="item['amount_profit']" t-options="{'widget': 'monetary', 'display_currency': env.company.currency_id}"/>
+                                      </td>
+                            
+                                      <t t-if="show_product">
+                                          <td class="td-2">
+                                              <t t-esc="item['quantity']"/>
+                                          </td>
+                                      </t>
+                                  </tr>
+                              </t>
+
+                          </tbody>
+                      </table>
+
+                      <div id="notices">
+                            <div>NOTICE:</div>
+                            <div class="notice">....</div>
+                          </div>
+                      <!--  <footer></footer>-->
+                  </div>
+              </body>
+              
+            </t>
+          </t>
+          <!-- </t> -->
+
+      </template>
+
+  </data>
+</odoo>

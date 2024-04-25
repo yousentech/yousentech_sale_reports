@@ -1,0 +1,380 @@
+<odoo>
+    <data>
+        <record id="YOUR_FORMAT_pdf_report" model="report.paperformat">
+            <field name="name">YOUR PAPER FORMAT NAME2</field>
+            <field name="default" eval="False" />
+            <field name="format">A4</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">35</field>
+            <field name="margin_bottom">30</field>
+            <field name="margin_left">5</field>
+            <field name="margin_right">5</field>
+            <field name="header_line" eval="True" />
+            <field name="header_spacing">30</field>
+            <field name="dpi">65</field>
+        </record>
+        <record id="YOUR_FORMAT_pdf_report1" model="report.paperformat">
+            <field name="name">YOUR PAPER FORMAT NAME2</field>
+            <field name="default" eval="True" />
+            <field name="format">A4</field>
+            <field name="page_height">0</field>
+            <field name="page_width">0</field>
+            <field name="orientation">Landscape</field>
+            <field name="margin_top">35</field>
+            <field name="margin_bottom">30</field>
+            <field name="margin_left">5</field>
+            <field name="margin_right">5</field>
+            <field name="header_line" eval="True" />
+            <field name="header_spacing">30</field>
+            <field name="dpi">60</field>
+        </record>
+
+        <record id="print_sale_rpt" model="ir.actions.report">
+            <field name="name">sale.pdf.report</field>
+            <field name="model">payment.redys</field>
+            <field name="report_type">qweb-pdf</field>
+            <!-- <field name="menu">True</field> -->
+            <field name="report_name">yousentech_sale_reports.pdf_sale_temp</field>
+            <field name="report_file">yousentech_sale_reports.pdf_sale_temp</field>
+            <field name="paperformat_id" ref="yousentech_sale_reports.YOUR_FORMAT_pdf_report" />
+
+        </record>
+        <record id="excl_sale_rpt" model="ir.actions.report">
+            <field name="name">sale XLSX Report</field>
+            <field name="model">payment.redys</field>
+            <field name="report_type">xlsx</field>
+            <field name="report_name">yousentech_sale_reports.report_xlsx_sale_view</field>
+            <field name="report_file">xlsx_sale</field>
+        </record>
+        <template id="header_footer_temp">
+
+
+            <t t-if="current_company">
+                <t t-set="company" t-value="current_company" />
+
+                <div class="header">
+                    <style>
+                        .header {
+                        display: flex;
+                        justify-content: space-between;
+                        /* align-items: center; */
+                        /*padding: 20px;*/
+
+                        }
+
+                        .logo {
+                        width: 180px;
+                        display:inline-block;
+                        <!-- margin-left: 220px; -->
+                        min-width:220px;
+                        /* margin-top: 10px; */
+                        /* text-align: right; */
+                        height: 120px;
+                        }
+
+                        .company-name {
+                        font-size: 15px;
+                        display:inline-block;
+                        <!-- margin-right: 200px; -->
+                        min-width:220px;
+                        color: #030102;
+                        text-align: justify;
+
+                        }
+
+                    </style>
+                    <t t-if="company.header_image">
+                        <img t-if="company.header_image"
+                            t-att-src="image_data_uri(company.header_image)"
+                            style="height: 12em;width:85em;" />
+                            <hr />
+                    </t>
+                    <t t-else="">
+
+                        <div style="display:flex;text-align: center; justify-content:space-between;">
+                            <div class='company-name'>
+                                <span t-field="company.name" />
+                                <br />
+                                <span t-field="company.street" />
+                                <br />
+                                <span t-field="company.street2" />
+                                <br />
+                                <span t-field="company.city" />
+                                <br />
+                                <span t-field="company.country_id" />
+                                <br />
+                                <span t-field="company.vat" />
+                                <br />
+
+                            </div>
+                            <div class='logo'>
+                                <img t-if="company.logo" t-att-src="image_data_uri(company.logo)"
+                                    class="float-start" alt="Logo" style="height:100px; width:150px" />
+                            </div>
+                            <hr />
+                        </div>
+                    </t>
+
+                    <!-- <br /> -->
+                  
+                    <!-- <br /> -->
+
+                </div>
+                <div class="footer">
+                    <hr />
+                    <t t-if="company.footer_image">
+                        <img t-if="company.footer_image"
+                            t-att-src="image_data_uri(company.footer_image)"
+                            style="height: 8em;width:85em;" />
+                    </t>
+                    <t t-else="">
+                        <div>
+                            <div class="mt-2 text-center">
+                                <!-- class="list-inline mb4 text-nowrap" -->
+                                <ul>
+                                    <!-- class="fa fa-phone fa-fw " -->
+                                    <t t-if="company.phone">
+                                        <li class="fa fa-phone">
+                                        </li>
+                                        <span class="o_force_ltr" t-field="company.phone" />
+                                    </t>
+                                    <br />
+                                    <t t-if="company.email">
+                                        <li
+                                            class="fa fa-envelope-o fa-fw list-inline-item d-inline">
+                                        </li>
+                                        <span t-field="company.email" />
+                                    </t>
+                                    <t t-if="company.website">
+                                        <li
+                                            class="fa fa-globe fa-fw list-inline-item d-inline">
+                                        </li>
+                                        <span t-field="company.website" />
+                                    </t>
+                                </ul>
+                            </div>
+                          
+                            <div  class="mt-2 text-center " >
+                                <div class="d-inline" style="margin-right: 320px;">
+                                Page: 
+                                    <strong>
+                                        <span class="page" /> / <span class="topage" />
+                                    </strong>
+                                </div>
+                                <div class="d-inline" style="margin-left: 320px;" >
+                                Report Date: 
+                                    <span style=" font-size: 13px;font-weight: 10px;"  t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y-%m-%d')"/>   
+                                
+                            </div>
+                            </div>
+
+                            <!-- 
+                                
+<div class="list-inline">
+                                <div class="list-inline-item"> Page: 
+                                    <strong>
+                                        <span class="page" /> / <span class="topage" />
+                                    </strong>
+                               </div>
+                                
+                                <div class="list-inline-item" style="margin-left:700px;text-align: center;"> Report Date: 
+                                    <span style=" font-size: 13px;font-weight: 10px;  text-align: center;"  t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y-%m-%d')"/>   
+                                </div>
+                            </div>
+
+                                
+                                
+                                
+                                
+                                <div class="list-inline-item"  >
+                                Page: <li>
+                                    <strong>
+                                        <span class="page" /> / <span class="topage" />
+                                    </strong>
+                                </li>
+                              
+                                </div>
+                                <div class="mt-2 text-end" >
+                                   
+                              </div>-->
+                        </div>  
+                            
+                           
+                           
+                    </t>
+                </div>
+            </t>
+        </template>
+        <template id="pdf_sale_temp">
+            <t t-call="web.html_container">
+                <t t-call="yousentech_sale_reports.header_footer_temp" />
+
+                <t t-call="web.external_layout">
+                    <head>
+
+                        <link href="/yousentech_sale_reports/static/src/css/pdf_report.css"
+                            rel="stylesheet" />
+                    </head>
+
+                    <body>
+
+                        <div class="header-info">
+                            <div class="invoice-name">
+                                <h1>Sales Report</h1>
+                            </div>
+                            <div class="wrapper">
+
+                                <div id="details" class="clearfix">
+                                    <table class="table-div">
+                                        <tbody>
+
+                                            <tr>
+                                                <td t-attf-class="#{'table-one-td-left' if current_lang=='en_US' else 'table-one-td-right'} text-nowrap">Partner :</td>
+                                                <td t-attf-class="#{'table-one-td1-left' if current_lang=='en_US' else 'table-one-td1-right'}" colspan="6">
+                                                    <t t-esc="data['partner_name']"></t>
+                                                </td>
+
+                                                <td t-attf-class="#{'table-one-td-left' if current_lang=='en_US' else 'table-one-td-right'} text-nowrap">From Date :</td>
+                                                <td t-attf-class="#{'table-one-td1-left' if current_lang=='en_US' else 'table-one-td1-right'}">
+                                                    <t t-esc="data['from_date']"/>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td t-attf-class="#{'table-one-td-left' if current_lang=='en_US' else 'table-one-td-right'} text-nowrap">Journal :</td>
+                                                <td t-attf-class="#{'table-one-td1-left' if current_lang=='en_US' else 'table-one-td1-right'}" colspan="6">
+                                                    <t t-esc="data['journal_name']"></t>
+                                                </td>
+
+                                                <td t-attf-class="#{'table-one-td-left' if current_lang=='en_US' else 'table-one-td-right'} text-nowrap">To Date:</td>
+                                                <td t-attf-class="#{'table-one-td1-left' if current_lang=='en_US' else 'table-one-td1-right'}">
+                                                    <t t-esc="data['to_date']"></t>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td t-attf-class="#{'table-one-td-left' if current_lang=='en_US' else 'table-one-td-right'} text-nowrap">Analysis Account:</td>
+                                                <td t-attf-class="#{'table-one-td1-left' if current_lang=='en_US' else 'table-one-td1-right'}" colspan="6">
+                                                    <t t-esc="data['analysis_account_name']"></t>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                </div>
+</div>
+
+                            <br />
+
+                            <br />
+                            <table class="invoice-items">
+                                <thead>
+                                    <tr>
+                                        <th>Date</th>
+                                        <t t-if="show_product">
+                                            <th>Product</th>
+                                        </t>
+                                        <th>Inv NO </th>
+                                        <th>Partner</th>
+                                        <th>Basic Total</th>
+                                        <th>Total tax items</th>
+                                        <th>Total exempted items</th>
+                                        <th>Total taxs</th>
+                                        <th>Total including tax</th>
+                                        <t t-if="show_product">
+                                            <th>Total Quantitiy</th>
+                                        </t>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="td-1">Total</td>
+                                        <!-- show_name_company -->
+                                        <td class="td-1" colspan="2">
+                                            <span t-esc="', '.join(g for g in mycompany)" />
+                                        </td>
+                                        <t t-if="show_product">
+                                            <td class="td-1">_</td>
+                                        </t>
+                                        <td class="td-1">
+                                            <t t-esc="sum_amount_untaxed" t-options="{'widget': 'monetary', 'display_currency': env.company.currency_id}" />
+                                        </td>
+                                        <td class="td-1">
+                                            <t t-esc="sum_amount_with_tax"  t-options="{'widget': 'monetary', 'display_currency': env.company.currency_id}"/>
+                                        </td>
+                                        <td class="td-1">
+                                            <t t-esc="sum_amount_out_tax" t-options="{'widget': 'monetary', 'display_currency': env.company.currency_id}" />
+                                        </td>
+                                        <td class="td-1">
+                                            <t t-esc="sum_amount_tax" t-options="{'widget': 'monetary', 'display_currency': env.company.currency_id}" />
+                                        </td>
+                                        <td class="td-1">
+                                            <t t-esc="sum_amount_total"  t-options="{'widget': 'monetary', 'display_currency': env.company.currency_id}"/>
+                                        </td>
+                                        <t t-if="show_product">
+                                            <td class="td-1">_</td>
+                                        </t>
+                                        <t t-if="show_product">
+                                            <td class="td-1">
+                                                <t t-esc="sum_quantity" />
+                                            </td>
+                                        </t>
+                                    </tr>
+                                    <t t-foreach="datas" t-as="item">
+
+                                        <tr>
+                                            <td class="td-2">
+                                                <t t-esc="item['date']" />
+                                            </td>
+
+                                            <td class="td-2">
+                                                <t t-esc="item['name']" />
+                                            </td>
+                                            <td class="td-2">
+                                                <t t-esc="item['partner_name']" />
+                                            </td>
+                                            <td class="td-2">
+                                                <t t-esc="item['amount_untaxed']" t-options="{'widget': 'monetary', 'display_currency': env.company.currency_id}" />
+                                            </td>
+                                            <td class="td-2">
+                                                <t t-esc="item['amount_with_tax']"  t-options="{'widget': 'monetary', 'display_currency': env.company.currency_id}"/>
+                                            </td>
+                                            <td class="td-2">
+                                                <t t-esc="item['amount_out_tax']"  t-options="{'widget': 'monetary', 'display_currency': env.company.currency_id}"/>
+                                            </td>
+                                            <td class="td-2">
+                                                <t t-esc="item['amount_tax']" t-options="{'widget': 'monetary', 'display_currency': env.company.currency_id}"/>
+                                            </td>
+                                            <td class="td-2">
+                                                <t t-esc="item['amount_total']" t-options="{'widget': 'monetary', 'display_currency': env.company.currency_id}" />
+                                            </td>
+                                            <t t-if="show_product">
+
+                                                <td class="td-2">
+                                                    <t t-esc="item['prodect_name']" />
+                                                </td>
+                                            </t>
+                                            <t t-if="show_product">
+                                                <td class="td-2">
+                                                    <t t-esc="item['quantity']" />
+                                                </td>
+                                            </t>
+                                        </tr>
+                                    </t>
+
+                                </tbody>
+                            </table>
+
+                            <div id="notices">
+                                <div>NOTICE:</div>
+                                <div class="notice">....</div>
+                            </div>
+                        </div>
+                    </body>
+
+
+                </t>
+            </t>
+            <!-- </t> -->
+
+        </template>
+    </data>
+</odoo>

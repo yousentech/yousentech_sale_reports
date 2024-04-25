@@ -1,0 +1,206 @@
+<templates>
+    <t t-name="yousentech_sale_reports.dy_report_review_payment_today_temp1" owl="1">
+        <head>
+            <link href="/yousentech_sale_reports/static/src/css/dynamic_report_style.css" rel="stylesheet" />
+        </head>
+        <!-- vh-100 overflow-auto -->
+        <center class="vh-100 overflow-y-auto bg-muted">
+            <div class="m-2 vw-100 overflow-x-auto">
+                <div class="row">
+                        <h2  class="text-primary fw-bold">Daily Sales Report</h2>   
+                </div>
+                <div class="head row">
+                        <div class='col m-1' >
+                            <label class="m-1" for="from_date">Partner <select class="form-select" t-model="state.select_partner_id" >
+                                <t t-foreach="options" t-as="option" t-key="option.id">
+                                    <option t-att-value="option.id" ><t t-esc="option.name"/></option>
+                                </t>
+                                        </select>    
+                                </label>
+                                <label class="m-1" for="from_date">Salesman <select class="form-select" t-model="state.select_saleman_id" >
+                                    <t t-foreach="salesman" t-as="option" t-key="option.id">
+                                        <option t-att-value="option.id" ><t t-esc="option.name"/></option>
+                                    </t>
+                                            </select>    
+                                    </label>
+                                <label class="m-1" for="from_date">Analytical accounts <select class="form-select" t-model="state.select_analysis_acc_id" >
+                                    <t t-foreach="analysis" t-as="option" t-key="option.id">
+                                        <option t-att-value="option.id"  ><t t-esc="option.name"   /></option>
+                                    </t>
+                                            </select>    
+                                </label>
+                                <!-- <label class="m-2" for="from_date">دفتر اليومية<select class="form-select" t-model="state.selcect_journal_id" style="width:180px">
+                                    <t t-foreach="journals" t-as="option" t-key="option.id">
+                                        <option t-att-value="option.id"  ><t t-esc="option.name"   /></option>
+                                    </t>
+                                            </select>    
+                                    </label> -->
+
+                                
+                            <label class="m-1" for="from_date">From Date 
+                                <br/><input class="m-1" type="date" t-model="state.from_date" t-att-value="state.from_date" />
+                            </label>
+                            <label class="m-1" for="to_date">To Date 
+                                <br/><input class="m-1" type="date" t-model="state.to_date"  t-att-value="state.to_date"  /> 
+                            </label>
+                            <label class="m-1" for="my_checkbox" >Hide Canceled Sales  
+                                <br/><input class="m-1" type="checkbox" name="my_checkbox" t-model="state.hide_payment_cancel"  t-att-value="state.hide_payment_cancel"  id="my_checkbox"/>
+                            </label>
+                           
+                        <button t-on-click="updateData_after" class="apply-btn btn btn-primary" >Apply</button>
+
+                    </div>
+                </div>
+
+                
+            <br />
+                <div class="row">
+                        <h4  class="text-primary fw-bold" >Company : <t t-esc=" state.Data.company"/> </h4>
+                </div>
+              <!--   <div class="row">
+                    <h4  class="text-primary fw-bold" ><t t-esc=" state.show_name_categ"/> </h4>
+            </div> -->
+           
+            <br />
+            <div>
+                <table class="mytable"> 
+                   
+                    <tr >
+                        <th>Date </th>
+                        <t t-if="state.show_product">
+                         <th>Product </th>
+                        </t>
+                        <th>Inv Type </th>
+
+                        <th> Inv No. </th>
+                        <th>Partner</th>
+                        <th>Basic Total</th>
+
+                        <th>Total taxs</th>
+                        <th>Total including tax</th>
+                        <th>Cash</th>
+                        <th>Bank</th>
+                        <th>Residual</th>
+
+                        <t t-if="state.show_product">
+                            <th>Total Quantitiy  </th>
+                        </t>
+                        
+                    </tr>
+                    <tbody >
+                        
+                        <tr class='bold-line'>
+                            <td >
+                                <span class="m-1">
+                                    Total
+                                </span>
+                                </td>
+                                <t t-if="state.show_product">
+                                    <td>_</td>
+                                </t>
+                                
+                                <td>_</td>
+                                <td>_</td>
+                                <td>_</td>
+
+                                <td><t t-esc="state.Data.sum_amount_untaxed"/></td>
+                                <td><t t-esc="state.Data.sum_amount_tax"/></td>
+                                <td><t t-esc="state.Data.sum_amount_with_tax"/></td>
+                                <td><t t-esc="state.Data.sum_amount_cash"/></td>
+                                <td><t t-esc="state.Data.sum_amount_bank"/></td>
+                                <td><t t-esc="state.Data.sum_amount_radiuse"/></td>
+
+                                <t t-if="state.show_product">
+                                    <td><t t-esc="state.Data.sum_quantity"/></td>
+                                </t>
+                        </tr>
+                        <t t-foreach="state.Data.data" t-as="item" t-key="item.id_l" >
+                            <tr   data-bs-toggle="collapse" t-att-data-account-id="item.id_l" t-attf-data-bs-target=".a{{item.id}}">
+                                <td>
+                                    <div class="dropdown dropdown-toggle">
+                                        <a data-bs-toggle="dropdown" href="#">
+                                            <span>
+                                                <t t-esc="item.date" />
+                                            </span>
+                                        </a>
+                                        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
+                                            <li >
+                                                <a class="view-detail"  t-on-click="_onClickViewDetail"  tabindex="-1" href="#" t-att-data-detail-id="item.id"  >
+                                                    View Source move
+                                                </a>
+                                         
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </td>
+                               
+                                <t t-if="state.show_product">
+                                    <td><t t-esc="item.prodect_name"/></td>
+                                </t>
+                                <td><t t-esc="item.move_type"/></td>
+                                <td><t t-esc="item.name"/></td>
+                                <td><t t-esc="item.partner_name"/></td>
+                                <td><t t-esc="item.amount_untaxed"/></td>
+                                <td><t t-esc="item.amount_tax"/></td>
+                                <td><t t-esc="item.amount_with_tax"/></td>
+                                <td><t t-esc="item.amount_cash"/></td>
+                                <td><t t-esc="item.amount_bank"/></td>
+                                <td><t t-esc="item.amount_radiuse"/></td>
+                                <t t-if="state.show_product">
+                                    <td><t t-esc="item.quantity"/></td>
+                                </t>
+                                
+                             
+                            </tr>
+                            
+                        </t>
+                        
+                           
+                    </tbody>
+                  
+                   
+              </table> 
+              </div> 
+              <br/>
+              <div >
+                <table  class="mytable">
+                <tr>
+                    <td >Total billing tax</td>
+                        
+                        <td><t t-esc="state.Data.sum_amount_with_tax"/></td>
+                        <td>Paid in Cash</td>
+                        <td><t t-esc="state.Data.sum_amount_cash"/></td>
+    
+                        <td>Paid in Bank</td>
+                        <td><t t-esc="state.Data.sum_amount_bank"/></td>
+                        <td>Total uncollected billing</td>
+                        <td><t t-esc="state.Data.sum_amount_radiuse"/></td>
+                </tr>
+                </table>
+            </div>
+            <br/>
+            <div >
+                <table  class="mytable">
+                    <tr>
+                        <th>Net Type </th>
+
+                        <th> The Amount Paid</th>
+                    </tr>
+                    <tbody>
+                        <t t-foreach="state.Data.jour_id_data" t-as="item" t-key="item.id" >
+                            <tr>
+                                    <td><t t-esc="item.name"/></td>
+                                    <td><t t-esc="item.total"/></td>
+                            </tr>
+                        </t>
+            </tbody>
+                </table>
+            </div> 
+            <br/>
+            <br/>
+            <br/>
+        </div>
+       
+        </center>
+        </t>
+</templates>
