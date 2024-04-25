@@ -5,7 +5,7 @@
   border-radius: 20px;
   border: 2px solid #E8E8E8;
   overflow: hidden;    
-    width: 98%;
+    width: 95%;
     text-align:start;
                                        
   }
@@ -27,7 +27,7 @@
     /* padding-left: 7px;
     padding-right: 7px; */
     color: white;
-    border-top: 2px solid white;
+    /* border-top: 2px solid white; */
     
 }
 

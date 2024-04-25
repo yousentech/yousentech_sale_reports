@@ -1,5 +1,1 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_payment_redys,payment.redys,model_payment_redys,,1,1,1,1
-access_profit_redys,profit.redys,model_profit_redys,,1,1,1,1
-access_paytoday_redys,paytoday.redys,model_paytoday_redys,,1,1,1,1
-
